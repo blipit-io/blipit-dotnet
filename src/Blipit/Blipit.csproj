@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <PackageId>Blipit</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Louward Labs</Authors>
+    <Company>Louward Labs</Company>
+    <Description>Blipit error monitoring for .NET. Know your app broke before your users tell you.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://docs.blipit.io/dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/blipit-io/blipit</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>error-monitoring;blipit;errors;logging</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RootNamespace>Blipit</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sentry" Version="6.11.1" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+</Project>
