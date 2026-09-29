@@ -12,7 +12,7 @@
     <Description>Blipit error monitoring for .NET. Know your app broke before your users tell you.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://docs.blipit.io/dotnet</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/blipit-io/blipit</RepositoryUrl>
+    <RepositoryUrl>https://github.com/blipit-io/blipit-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>error-monitoring;blipit;errors;logging</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
