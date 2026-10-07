@@ -48,6 +48,8 @@ Blipit.Blipit.CaptureSecurity("login_failed", "ana@example.com", ip: "10.0.0.1")
 Blipit.Blipit.Flush();
 ```
 
+Login attempts (`CaptureSecurity`) need the project's secret key (init with it on the server) and the Scale plan; with the public key ingest refuses them with 403 `security_needs_secret_key`.
+
 ## Performance
 
 Set `TracesSampleRate = 0.2` in the options and requests show up on the Performance page.
