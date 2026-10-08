@@ -18,6 +18,10 @@ namespace Blipit
     public static class Blipit
     {
         public const string DefaultEndpoint = "https://in.blipit.io";
+        public const string PublicKeyWarning = "[blipit] login attempts need the project's secret key (blipit_sk_...). This SDK was started with the public key, so CaptureSecurity sends nothing. Use the secret key on the server.";
+
+        private static volatile bool publicKey;
+        private static int publicKeyWarned;
 
         public static string Dsn(string key, string project, string endpoint = DefaultEndpoint)
         {
@@ -37,6 +41,7 @@ namespace Blipit
 
         public static void Apply(SentryOptions sentry, BlipitOptions options)
         {
+            publicKey = options.Key.StartsWith("blipit_pk_", StringComparison.Ordinal);
             sentry.Dsn = Dsn(options.Key, options.Project, options.Endpoint);
             sentry.Environment = options.Environment;
             sentry.Release = options.Release;
@@ -74,6 +79,11 @@ namespace Blipit
 
         public static SentryId CaptureSecurity(string kind, string actor, string? outcome = null, string? actorId = null, string? ip = null, string? userAgent = null, string? target = null)
         {
+            if (publicKey)
+            {
+                if (System.Threading.Interlocked.Exchange(ref publicKeyWarned, 1) == 0) Console.Error.WriteLine(PublicKeyWarning);
+                return SentryId.Empty;
+            }
             var context = SecurityContext(kind, actor, outcome, actorId, ip, userAgent, target);
             var level = kind == "login_failed" || kind == "login_blocked" ? SentryLevel.Warning : SentryLevel.Info;
             return SentrySdk.CaptureMessage($"{kind} for {actor}", scope =>
